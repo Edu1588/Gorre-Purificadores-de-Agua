@@ -30,7 +30,7 @@ export function FixedButtons() {
   const whatsappUrl = `https://api.whatsapp.com/send/?phone=551938452226&text=${whatsappMessage}&type=phone_number&app_absent=0`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-center">
       <AnimatePresence>
         {isVisible && (
           <motion.button
@@ -38,10 +38,12 @@ export function FixedButtons() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 20 }}
             onClick={scrollToTop}
-            className="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-slate-700 transition-colors"
+            className="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center shadow-lg transition-all relative overflow-hidden group hover:shadow-blue-500/50"
             aria-label="Voltar ao topo"
           >
-            <ArrowUp className="w-6 h-6" />
+            {/* Efeito Liquido (Wave) */}
+            <div className="absolute top-[100%] left-1/2 w-[250%] aspect-square bg-blue-500 rounded-[40%] -translate-x-1/2 group-hover:top-[-50%] group-hover:rotate-180 transition-all duration-700 ease-in-out" />
+            <ArrowUp className="w-6 h-6 relative z-10 group-hover:-translate-y-1 transition-transform duration-300" />
           </motion.button>
         )}
       </AnimatePresence>
