@@ -11,6 +11,21 @@ export function WaveDivider({ color, position = 'bottom' }: WaveDividerProps) {
   return (
     <div className={`absolute ${isTop ? 'top-0 rotate-180 -translate-y-1' : 'bottom-0 translate-y-1'} left-0 right-0 overflow-hidden leading-none pointer-events-none`}>
       <svg viewBox="0 0 1440 160" preserveAspectRatio="none" className="w-full h-24 md:h-32 block">
+        {/* Secondary wave - moving inversely */}
+        <motion.path 
+          fill="#52deff"
+          fillOpacity="0.4" 
+          d="M0,96L80,90.7C160,85,320,75,480,85.3C640,96,800,128,960,128C1120,128,1280,96,1360,80L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+          animate={{
+            d: [
+              "M0,96L80,90.7C160,85,320,75,480,85.3C640,96,800,128,960,128C1120,128,1280,96,1360,80L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z",
+              "M0,64L80,74.7C160,85,320,107,480,101.3C640,96,800,64,960,53.3C1120,43,1280,53,1360,58.7L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z",
+              "M0,96L80,90.7C160,85,320,75,480,85.3C640,96,800,128,960,128C1120,128,1280,96,1360,80L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+            ]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* Primary wave */}
         <motion.path 
           fill={color}
           fillOpacity="1" 
