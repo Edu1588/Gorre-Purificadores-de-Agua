@@ -46,16 +46,14 @@ export function Educational() {
             className="relative"
           >
             <div className="aspect-square rounded-[3rem] overflow-hidden bg-slate-100 relative shadow-2xl">
-              {/* Abstract fluid placeholder since we don't have real images */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-300 via-blue-500 to-blue-800 opacity-90" />
-              <div className="absolute inset-0 flex items-center justify-center p-12">
-                <div className="w-full h-full rounded-full border-[16px] border-white/20 flex items-center justify-center backdrop-blur-sm relative">
-                  <Droplet className="w-32 h-32 text-white absolute -mt-4 animate-pulse" />
-                  <div className="absolute bottom-12 text-white text-center font-bold text-xl uppercase tracking-widest opacity-80">
-                    Água Alcalina
-                  </div>
-                </div>
-              </div>
+              <video 
+                src="https://res.cloudinary.com/ifuatk2z/video/upload/v1784845252/2551630_Water_Liquid_1920x1080_buykux.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
             
             {/* Floating Badges */}
