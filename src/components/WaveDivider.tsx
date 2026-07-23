@@ -9,7 +9,7 @@ export function WaveDivider({ color, position = 'bottom' }: WaveDividerProps) {
   const isTop = position === 'top';
   
   return (
-    <div className={`absolute ${isTop ? 'top-0 rotate-180 -translate-y-1' : 'bottom-0 translate-y-1'} left-0 right-0 overflow-hidden leading-none pointer-events-none`}>
+    <div className={`absolute ${isTop ? 'bottom-full translate-y-px' : 'bottom-0 translate-y-1'} left-0 right-0 overflow-hidden leading-none pointer-events-none z-30`}>
       <svg viewBox="0 0 1440 160" preserveAspectRatio="none" className="w-full h-24 md:h-32 block">
         {/* Secondary wave - moving inversely */}
         <motion.path 

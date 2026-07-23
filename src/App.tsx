@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { TopBar } from './components/TopBar';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { WaveDivider } from './components/WaveDivider';
 import { BenefitsBar } from './components/BenefitsBar';
 import { ProductsSection } from './components/ProductsSection';
 import { Educational } from './components/Educational';
@@ -38,6 +39,7 @@ export default function App() {
         <Hero />
         {/* Section 2 - Content slides smoothly up over the sticky Hero */}
         <div className="relative z-10 bg-slate-50">
+          <WaveDivider color="#f8fafc" position="top" />
           <BenefitsBar />
           <ProductsSection />
           <Educational />

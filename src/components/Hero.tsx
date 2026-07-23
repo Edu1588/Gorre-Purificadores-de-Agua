@@ -107,11 +107,6 @@ export function Hero() {
           </motion.div>
         </div>
       </div>
-
-      {/* 4. Bottom Wave Divider (z-30) */}
-      <div className="absolute inset-x-0 bottom-0 pointer-events-none z-30">
-        <WaveDivider color="#f8fafc" />
-      </div>
     </section>
   );
 }
