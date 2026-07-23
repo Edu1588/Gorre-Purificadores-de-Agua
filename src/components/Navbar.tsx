@@ -35,7 +35,7 @@ export function Navbar() {
             <img 
               src="https://res.cloudinary.com/ifuatk2z/image/upload/v1784833951/logo-rodape-gorre_ks0dnb.svg" 
               alt="Gorre Purificadores" 
-              className={`h-10 transition-all ${isScrolled ? '' : 'brightness-0 invert'}`} 
+              className={`h-6 sm:h-8 md:h-10 transition-all ${isScrolled ? '' : 'brightness-0 invert'}`} 
             />
           </div>
 
