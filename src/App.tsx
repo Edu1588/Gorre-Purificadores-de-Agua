@@ -10,6 +10,7 @@ import { Hero } from './components/Hero';
 import { WaveDivider } from './components/WaveDivider';
 import { BenefitsBar } from './components/BenefitsBar';
 import { ProductsSection } from './components/ProductsSection';
+import { WaterComparison } from './components/WaterComparison';
 import { Educational } from './components/Educational';
 import { ScrollingFeatures } from './components/ScrollingFeatures';
 import { Audience } from './components/Audience';
@@ -43,6 +44,7 @@ export default function App() {
           <WaveDivider color="#f8fafc" position="top" />
           <BenefitsBar />
           <ProductsSection />
+          <WaterComparison />
           <Educational />
           <ScrollingFeatures />
           <Audience />
