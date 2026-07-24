@@ -18,8 +18,10 @@ export function Navbar() {
     { name: 'Home', href: '#' },
     { name: 'Nossos Produtos', href: '#produtos' },
     { name: 'Benefícios', href: '#beneficios' },
+    { name: 'Depoimentos', href: '#depoimentos' },
     { name: 'Sobre', href: '#sobre' },
     { name: 'Revendedor', href: '#revendedor' },
+    { name: 'FAQ', href: '#faq' },
   ];
 
   return (

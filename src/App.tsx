@@ -16,6 +16,7 @@ import { Audience } from './components/Audience';
 import { VideoTestimonials } from './components/VideoTestimonials';
 import { Testimonials } from './components/Testimonials';
 import { IntelligentHydration } from './components/IntelligentHydration';
+import { Faq } from './components/Faq';
 import { About } from './components/About';
 import { Reseller } from './components/Reseller';
 import { Contact } from './components/Contact';
@@ -51,6 +52,7 @@ export default function App() {
           <About />
           <Reseller />
           <Contact />
+          <Faq />
         </div>
       </main>
       <Footer />
