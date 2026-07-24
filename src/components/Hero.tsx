@@ -36,7 +36,7 @@ export function Hero() {
       {/* 1. Background Image (z-0) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <img 
-          src="https://res.cloudinary.com/ifuatk2z/image/upload/v1784846512/GORRE_V3_omctba.png" 
+          src="https://res.cloudinary.com/djw0tqmiw/image/upload/v1784930336/eagcwxvmtutrempmr6ed.png" 
           alt="Gorre Background" 
           className="w-full h-full object-cover [object-position:75%_center] md:object-center block"
         />
