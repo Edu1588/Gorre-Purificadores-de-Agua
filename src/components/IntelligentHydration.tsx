@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ShieldPlus, Bone, Droplets, ActivitySquare } from 'lucide-react';
 
 import { WaveDivider } from './WaveDivider';
-import { LiquidBackground } from './LiquidBackground';
+import { LiquidEffectAnimation } from './ui/liquid-effect-animation';
 
 const effects = [
   {
@@ -29,19 +29,19 @@ const effects = [
 
 export function IntelligentHydration() {
   return (
-    <section className="py-24 bg-blue-900 text-white relative overflow-hidden" id="beneficios">
+    <section className="pt-24 pb-36 bg-blue-900 text-white relative overflow-hidden" id="beneficios">
       <WaveDivider color="#eff6ff" position="top" />
 
-      {/* Interactive Liquid Background on Hover */}
-      <LiquidBackground />
+      {/* WebGL ThreeJS Fluid Liquid Effect Animation */}
+      <LiquidEffectAnimation />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10 pb-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold mb-6"
+            className="text-3xl md:text-5xl font-bold mb-6 text-white drop-shadow-md"
           >
             Hidratação Inteligente
           </motion.h2>
@@ -50,19 +50,19 @@ export function IntelligentHydration() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-blue-100/80 font-light"
+            className="text-xl text-blue-100 font-light drop-shadow"
           >
             Conheça os efeitos transformadores no seu corpo
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-12">
           {effects.map((effect, index) => {
             const Icon = effect.icon;
             return (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 backdrop-blur-md rounded-3xl p-8 hover:bg-white/10 transition-colors group"
+                className="bg-blue-950/60 border border-white/15 backdrop-blur-md rounded-3xl p-8 sm:p-10 pb-12 hover:bg-blue-900/70 transition-all duration-300 group shadow-xl"
               >
                 <div className="flex flex-col sm:flex-row gap-6 items-start">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center shrink-0 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform">
@@ -70,7 +70,7 @@ export function IntelligentHydration() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">{effect.title}</h3>
-                    <p className="text-blue-100/70 leading-relaxed">
+                    <p className="text-blue-100/90 leading-relaxed text-base">
                       {effect.description}
                     </p>
                   </div>
@@ -84,3 +84,4 @@ export function IntelligentHydration() {
     </section>
   );
 }
+
