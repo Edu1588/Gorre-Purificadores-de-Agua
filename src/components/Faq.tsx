@@ -302,7 +302,7 @@ export function Faq() {
           </div>
 
           <a
-            href="https://wa.me/5541999999999?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20os%20purificadores%20Gorre."
+            href="https://api.whatsapp.com/send/?phone=551938452226&text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20os%20purificadores%20Gorre.&type=phone_number&app_absent=0"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-emerald-500/30 transition-all duration-300 hover:scale-105 whitespace-nowrap text-sm sm:text-base shrink-0"
