@@ -48,9 +48,73 @@ const CLEAN_ITEMS: BadgetItem[] = [
 export function WaterComparison() {
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
   const [activeHoverItem, setActiveHoverItem] = useState<string | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const userInteractionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-sweep animation when user is not actively dragging
+  useEffect(() => {
+    if (isUserInteracting) return;
+
+    let animationFrameId: number;
+    let startTime: number | null = null;
+
+    const easeInOutCubic = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const TOTAL_CYCLE = 16800; // 16.8 seconds total cycle
+
+    const getPosForTime = (elapsed: number) => {
+      const t = elapsed % TOTAL_CYCLE;
+
+      if (t < 3000) {
+        // 3s pause at center (50%)
+        return 50;
+      } else if (t < 4200) {
+        // Move to left (50% -> 25%) over 1.2s
+        const progress = (t - 3000) / 1200;
+        return 50 + (25 - 50) * easeInOutCubic(progress);
+      } else if (t < 7200) {
+        // 3s pause at left (25%)
+        return 25;
+      } else if (t < 8400) {
+        // Move back to center (25% -> 50%) over 1.2s
+        const progress = (t - 4200) / 1200;
+        return 25 + (50 - 25) * easeInOutCubic(progress);
+      } else if (t < 11400) {
+        // 3s pause at center (50%)
+        return 50;
+      } else if (t < 12600) {
+        // Move to right (50% -> 75%) over 1.2s
+        const progress = (t - 11400) / 1200;
+        return 50 + (75 - 50) * easeInOutCubic(progress);
+      } else if (t < 15600) {
+        // 3s pause at right (75%)
+        return 75;
+      } else {
+        // Move back to center (75% -> 50%) over 1.2s
+        const progress = (t - 15600) / 1200;
+        return 75 + (50 - 75) * easeInOutCubic(progress);
+      }
+    };
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+
+      setSliderPos(getPosForTime(elapsed));
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [isUserInteracting]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -75,6 +139,15 @@ export function WaterComparison() {
     setSliderPos(percentage);
   }, []);
 
+  const startInteraction = useCallback((clientX: number) => {
+    setIsDragging(true);
+    setIsUserInteracting(true);
+    if (userInteractionTimeoutRef.current) {
+      clearTimeout(userInteractionTimeoutRef.current);
+    }
+    handleMove(clientX);
+  }, [handleMove]);
+
   const handleTouchMove = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
     handleMove(e.touches[0].clientX);
@@ -87,6 +160,13 @@ export function WaterComparison() {
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
+    // Resume auto-sweep after 4 seconds of inactivity
+    if (userInteractionTimeoutRef.current) {
+      clearTimeout(userInteractionTimeoutRef.current);
+    }
+    userInteractionTimeoutRef.current = setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 4000);
   }, []);
 
   useEffect(() => {
@@ -156,14 +236,8 @@ export function WaterComparison() {
           <div
             ref={containerRef}
             className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] cursor-ew-resize overflow-hidden"
-            onMouseDown={(e) => {
-              setIsDragging(true);
-              handleMove(e.clientX);
-            }}
-            onTouchStart={(e) => {
-              setIsDragging(true);
-              handleMove(e.touches[0].clientX);
-            }}
+            onMouseDown={(e) => startInteraction(e.clientX)}
+            onTouchStart={(e) => startInteraction(e.touches[0].clientX)}
           >
             {/* === SIDE 1: CLEAN WATER (FULL UNDERNEATH BACKGROUND) === */}
             <div className="absolute inset-0 w-full h-full bg-slate-900">
