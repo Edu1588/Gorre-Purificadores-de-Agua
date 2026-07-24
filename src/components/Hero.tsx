@@ -14,18 +14,22 @@ export function Hero() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Smooth blur, scale and fade out for text & buttons as user scrolls (desktop only)
-  const textBlur = useTransform(scrollY, [0, 350], ['blur(0px)', 'blur(20px)']);
-  const textOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const textY = useTransform(scrollY, [0, 350], [0, -70]);
-  const textScale = useTransform(scrollY, [0, 350], [1, 0.92]);
+  // Staggered scroll transforms (desktop only): Title -> Subtext -> Buttons (disappears LAST)
+  const titleBlur = useTransform(scrollY, [0, 200], ['blur(0px)', 'blur(16px)']);
+  const titleOpacity = useTransform(scrollY, [0, 180], [1, 0]);
+  const titleY = useTransform(scrollY, [0, 200], [0, -60]);
 
-  const scrollStyle = isDesktop ? {
-    filter: textBlur,
-    opacity: textOpacity,
-    y: textY,
-    scale: textScale,
-  } : {};
+  const subtextBlur = useTransform(scrollY, [50, 280], ['blur(0px)', 'blur(16px)']);
+  const subtextOpacity = useTransform(scrollY, [50, 250], [1, 0]);
+  const subtextY = useTransform(scrollY, [50, 280], [0, -50]);
+
+  const buttonsBlur = useTransform(scrollY, [150, 380], ['blur(0px)', 'blur(16px)']);
+  const buttonsOpacity = useTransform(scrollY, [150, 350], [1, 0]);
+  const buttonsY = useTransform(scrollY, [150, 380], [0, -40]);
+
+  const titleScrollStyle = isDesktop ? { filter: titleBlur, opacity: titleOpacity, y: titleY } : {};
+  const subtextScrollStyle = isDesktop ? { filter: subtextBlur, opacity: subtextOpacity, y: subtextY } : {};
+  const buttonsScrollStyle = isDesktop ? { filter: buttonsBlur, opacity: buttonsOpacity, y: buttonsY } : {};
 
   return (
     <section className="relative md:sticky top-0 min-h-[650px] md:h-screen md:min-h-[700px] w-full flex items-center overflow-hidden bg-[#08204d] pt-20 pb-16 md:py-0 z-0">
@@ -57,7 +61,7 @@ export function Hero() {
         <div className="max-w-3xl mx-auto md:mx-0 text-center md:text-left">
           {/* Title Layer at z-10 (behind Overlap Image z-20 for 3D depth) */}
           <motion.div
-            style={scrollStyle}
+            style={titleScrollStyle}
             className="relative z-10 pointer-events-auto mb-6"
           >
             <motion.h1
@@ -74,23 +78,23 @@ export function Hero() {
             </motion.h1>
           </motion.div>
 
-          {/* Subtext & Buttons Layer at z-30 (above Overlap Image z-20 for unblocked clarity) */}
-          <motion.div
-            style={scrollStyle}
-            className="relative z-30 pointer-events-auto"
-          >
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-8 max-w-2xl mx-auto md:mx-0 text-base sm:text-xl md:text-2xl font-light leading-[2.2] text-white"
-            >
-              <span className="inline bg-[#011b46] px-3 py-1 box-decoration-clone rounded-none shadow-md">
-                Transformamos a sua saúde com água pura, alcalina e ionizada. Tecnologia e inovação para o bem-estar da sua família.
-              </span>
-            </motion.p>
+          {/* Subtext & Buttons Container */}
+          <div className="relative z-30 pointer-events-auto">
+            <motion.div style={subtextScrollStyle}>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-8 max-w-2xl mx-auto md:mx-0 text-base sm:text-xl md:text-2xl font-light leading-[2.2] text-white"
+              >
+                <span className="inline bg-[#011b46] px-3 py-1 box-decoration-clone rounded-none shadow-md">
+                  Transformamos a sua saúde com água pura, alcalina e ionizada. Tecnologia e inovação para o bem-estar da sua família.
+                </span>
+              </motion.p>
+            </motion.div>
 
             <motion.div
+              style={buttonsScrollStyle}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -104,7 +108,7 @@ export function Hero() {
                 Seja um revendedor
               </button>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
