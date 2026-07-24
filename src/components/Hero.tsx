@@ -50,7 +50,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          src="https://res.cloudinary.com/ifuatk2z/image/upload/v1784849538/ChatGPT-Image-23-de-jul_pmfu2i.png" 
+          src="https://res.cloudinary.com/ifuatk2z/image/upload/v1784852379/GORRE_SOBREPOR3_z32yqy.png" 
           alt="Gorre Products Overlap" 
           className="w-full h-full object-cover object-center block"
         />

@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ShieldPlus, Bone, Droplets, ActivitySquare } from 'lucide-react';
 
 import { WaveDivider } from './WaveDivider';
+import { LiquidBackground } from './LiquidBackground';
 
 const effects = [
   {
@@ -30,8 +31,9 @@ export function IntelligentHydration() {
   return (
     <section className="py-24 bg-blue-900 text-white relative overflow-hidden" id="beneficios">
       <WaveDivider color="#eff6ff" position="top" />
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-cyan-600/10 blur-3xl rounded-full translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-1/2 h-full bg-blue-500/20 blur-3xl rounded-full -translate-x-1/2" />
+
+      {/* Interactive Liquid Background on Hover */}
+      <LiquidBackground />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
